@@ -101,25 +101,26 @@ const FormInput = () => {
         <h2>Register Your Pet</h2>
         <div>
           <label className="lableField">Name*:</label>
-          <input className="valueFiled" value={values.name} onChange={set('name')} />
+          <input className="valueFiled" value={values.name} onChange={set('name')}
+          required />
         </div>
         <div>
           <label className="lableField">Categories*:</label>
-          <select className="valueFiled" value={values.category} onChange={set('category')}>
+          <select required className="valueFiled" value={values.category} onChange={set('category')}>
             <option value="">Select categories</option>
             {categories.map(c => <option key={c.id}>{c.name}</option>)}
           </select>
         </div>
         <div>
           <label className="lableField">Tags*:</label>
-          <select className="valueFiled" value={values.tag} onChange={set('tag')}>
+          <select required className="valueFiled" value={values.tag} onChange={set('tag')}>
             <option value="">Select tags</option>
             {tags.map(c => <option key={c.id}>{c.name}</option>)}
           </select>
         </div>
         <div>
           <label className="lableField">Status</label>
-          <select className="valueFiled" value={values.status} onChange={set('status')}>
+          <select required className="valueFiled" value={values.status} onChange={set('status')}>
             <option value="">Select categories</option>
             {status.map(c => <option key={c}>{c}</option>)}
           </select>
