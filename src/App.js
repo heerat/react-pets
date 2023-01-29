@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import './App.css';
+import FormInput from './Components/FormInput';
+import Table from './Components/Table';
 
 function App() {
+  const [petsDetails, setPetsDetails] = useState([]);
+
+
+  //API for getting pets details
+  const fetchPets = async () => {
+    const data = await axios.get('https://petstore3.swagger.io/api/v3/pet/findByStatus?status=available');
+    setPetsDetails(data.data)
+  }
+
+  //API fpr deleting a perticular pet
+  const deletePet = async petId => {
+    await fetch(`https://petstore3.swagger.io/api/v3/pet/${petId}`, { method: 'DELETE' })
+      .then(() => fetchPets());
+
+
+  }
+
+  useEffect(() => {
+    fetchPets();
+  }, [])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FormInput data={petsDetails} />
+      <div className='gap'></div>
+      <Table data={petsDetails} deletePet={deletePet} />
     </div>
   );
 }
